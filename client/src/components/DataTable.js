@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from '../config/axiosUrl';
 import * as axiosURLS from '../config/constants';
-import { Table } from "antd";
+import Table from "antd/lib/table";
 
 function DataTable() {
     const [data, setData] = useState([])
@@ -142,8 +142,10 @@ function DataTable() {
 
 
     return (
-        <div>
-            <Table columns={columns} dataSource={data.filter(el => el.state_name)} bordered pagination={false}/>
+        <div style={{ maxWidth: '800px' }}>
+            <Table columns={columns} dataSource={data.filter(el => el.state_name)} bordered pagination={false} footer={() => <span>
+                Total Active Cases: {data.filter(el => el.state_code === "00")[0]?.new_active}
+            </span>} />
         </div>
     );
 }

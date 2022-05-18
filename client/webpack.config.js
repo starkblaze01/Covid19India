@@ -10,11 +10,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      favicon: "./src/assets/favicon.png",
     }),
   ],
   resolve: {
     modules: [__dirname, "src", "node_modules"],
-    extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
+    extensions: [".js", ".jsx", ".tsx", ".ts"],
   },
   module: {
     rules: [
@@ -31,6 +32,10 @@ module.exports = {
         test: /\.png|svg|jpg|gif$/,
         use: ["file-loader"],
       },
+      {
+        test: /\.less$/,
+        use: ["style-loader", { loader: 'css-loader', options: { sourceMap: 1 } }, "postcss-loader", "less-loader"]
+      }
     ],
   },
 };

@@ -18,5 +18,6 @@
   },
   "homepage": "https://github.com/starkblaze01/Covid-19_Tracker#readme",
   "dependencies": {
+    "express": "^4.18.1"
   }
 }
