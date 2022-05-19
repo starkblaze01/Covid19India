@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "dist"),
+    sourceMapFilename: "[name].js.map",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -50,7 +51,7 @@ module.exports = {
       },
       {
         test: /\.png|svg|jpg|gif$/,
-        use: ["file-loader"],
+        use: ["file-loader?name=images/[name].[ext]"],
       }
     ],
   },

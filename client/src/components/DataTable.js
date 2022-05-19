@@ -1,26 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from '../config/axiosUrl';
-import * as axiosURLS from '../config/constants';
+import React from "react";
 import { Table } from "antd";
 import funelIcon from "../assets/funnel.png"
 import sortIcon from "../assets/sort.png";
 
-function DataTable() {
-    const [data, setData] = useState([])
-    useEffect(() => {
-        axios.get(axiosURLS.STATE_WISE_DATA)
-            .then(res => {
-                setData(res.data.map(el => {
-                    let tempObj = el;
-                    tempObj.key = el.state_code;
-                    return tempObj;
-                }))
-            }).catch(err => {
-                console.log(err)
-                alert('Something went wrong')
-            });
-    }
-    , [])
+function DataTable(props) {
 
     const columns = [
         {
@@ -38,7 +21,7 @@ function DataTable() {
             dataIndex: 'state_name',
             key: 'state_name',
             fixed: 'left',
-            filters: data.filter(item => item.state_code !== '00').map(item => ({
+            filters: props.data.filter(item => item.state_code !== '00').map(item => ({
                 text: item.state_name,
                 value: item.state_name
             })),
@@ -168,9 +151,9 @@ function DataTable() {
 
     return (
         <div style={{ maxWidth: '100%', overflow: 'scroll' }}>
-            <Table columns={columns} dataSource={data.filter(el => el.state_name)} bordered pagination={false} footer={() => <span>
-                Total Active Cases: {data.filter(el => el.state_code === "00")[0]?.new_active}
-                &nbsp; &nbsp; Total Deaths: {data.filter(el => el.state_code === "00")[0]?.new_death }
+            <Table columns={columns} dataSource={props.data.filter(el => el.state_name)} bordered pagination={false} footer={() => <span>
+                Total Active Cases: {props.data.filter(el => el.state_code === "00")[0]?.new_active}
+                &nbsp; &nbsp; Total Deaths: {props.data.filter(el => el.state_code === "00")[0]?.new_death }
             </span>} />
         </div>
     );
