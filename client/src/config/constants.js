@@ -1,0 +1,1 @@
+export const STATE_WISE_DATA = 'data/datanew.json';
