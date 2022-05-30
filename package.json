@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/starkblaze01/Covid-19_Tracker#readme",
   "dependencies": {
+    "apicache": "^1.6.3",
+    "axios": "^0.27.2",
     "express": "^4.18.1"
   }
 }

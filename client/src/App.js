@@ -14,7 +14,15 @@ const App = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState('table');
     useEffect(() => {
-        axios.get(axiosURLS.STATE_WISE_DATA)
+        axios.get(window.location.origin + axiosURLS.COVID_DATA_URL).then(res => {
+                setData(res.data.map(el => {
+                    let tempObj = el;
+                    tempObj.key = el.state_code;
+                    return tempObj;
+                }))
+            }).catch(err => {
+                console.log(err);
+                axios.get(axiosURLS.STATE_WISE_DATA)
             .then(res => {
                 setData(res.data.map(el => {
                     let tempObj = el;
@@ -25,6 +33,9 @@ const App = () => {
                 console.log(err)
                 alert('Something went wrong')
             });
+            })
+
+        
     }
     , [])
 
